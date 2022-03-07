@@ -29,7 +29,7 @@ exports.createTodo = (req, res, next) => {
   const task = req.body.task
   const todo = new Todo({
     task: task,
-    // creator: { name: 'Bob' },
+    creator: { name: 'Parent' },
   })
   todo
     .save()
