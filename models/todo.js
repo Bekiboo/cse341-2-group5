@@ -15,11 +15,11 @@ const todoSchema = new Schema(
     // doer: {
     //   type: Object,
     //   required: true,
-    // },
-    // creator: {
-    //   type: Object,
-    //   required: true,
-    // },
+    //},
+    creator: {
+      type: Object,
+      required: true,
+    },
   },
   { timestamps: true }
 )

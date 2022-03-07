@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const { port, mongoURI } = require('./config')
 const routes = require('./routes/todoList')
+const authRoutes = require('./routes/auth');
 
 const app = express()
 
@@ -17,12 +18,14 @@ app.use((req, res, next) => {
 })
 
 app.use('/todoList', routes)
+app.use('/auth', authRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error)
   const status = error.statusCode || 500
   const message = error.message
-  res.status(status).json({ message: message })
+  const data =  error.data;
+  res.status(status).json({ message: message, data: data })
 })
 
 mongoose
