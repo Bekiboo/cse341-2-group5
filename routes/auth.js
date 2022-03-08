@@ -17,7 +17,8 @@ router.put('/signup', [
                 return Promise.reject('Email alrady exists.');
             }
         })
-    }), // I removed the normalizeEmail() because it removes dots from emails
+    }),
+    // .normalizeEmail(), I commented out normalizeEmail because it removes dots from emails
     body('password')
     .trim()
     .isLength({min: 5}),
