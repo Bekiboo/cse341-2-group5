@@ -1,12 +1,11 @@
 <script>
-  import { fade } from 'svelte/transition'
-  export let signinModal
-
   let json = {}
 
   let email
   let password
-  
+
+  let open
+
   let login = (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
@@ -23,47 +22,37 @@
     //     console.log('Login success');
     //   }
     // })
+    open = false
   }
 </script>
 
-{#if signinModal}
-  <div class="backdrop" on:click|self transition:fade={{ duration: 100 }}>
-    <div class="modal">
-      <form on:submit={login}>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="Email"
-          bind:value={email}
-        />
-        <input
-          id="password"
-          name="password"
-          type="text"
-          placeholder="Password"
-          bind:value={password}
-        />
-        <button>Login</button>
-      </form>
-    </div>
+<!-- {#if signinModal} -->
+
+<input type="checkbox" id="login-modal" class="modal-toggle" bind:checked={open} />
+<div class="modal">
+  <div class="modal-box">
+    <label for="login-modal" class="btn btn-sm btn-circle absolute right-2 top-2"
+      >✕</label
+    >
+    <form on:submit={login}>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="Email"
+        bind:value={email}
+      />
+      <input
+        id="password"
+        name="password"
+        type="text"
+        placeholder="Password"
+        bind:value={password}
+      />
+      <button>Login</button>
+    </form>
   </div>
-{/if}
+</div>
 
 <style>
-  .backdrop {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 100;
-  }
-  .modal {
-    padding: 2rem;
-    border-radius: 1rem;
-    max-width: 16rem;
-    margin: 20% auto;
-    text-align: center;
-    background: #f7f7f7;
-  }
 </style>

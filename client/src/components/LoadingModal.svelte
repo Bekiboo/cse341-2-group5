@@ -30,14 +30,4 @@
 </div>
 
 <style>
-  .loader {
-    position: absolute;
-    display: grid;
-    place-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    min-height: 80vh;
-    max-width: 32rem;
-    min-width: 100%;
-    transform: translate(-1rem, -6.8rem);
-  }
 </style>
