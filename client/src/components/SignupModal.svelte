@@ -37,8 +37,9 @@
     <label for="signup-modal" class="btn btn-sm btn-circle absolute right-2 top-2"
       >✕</label
     >
-    <form on:submit={signup}>
+    <form on:submit={signup} class="flex flex-col items-center">
       <input
+      class="input input-bordered w-full max-w-xs mb-2"
         id="email"
         name="email"
         type="email"
@@ -46,6 +47,7 @@
         bind:value={email}
       />
       <input
+      class="input input-bordered w-full max-w-xs mb-2"
         id="name"
         name="name"
         type="text"
@@ -53,6 +55,7 @@
         bind:value={name}
       />
       <input
+      class="input input-bordered w-full max-w-xs mb-2"
         id="password"
         name="password"
         type="text"
@@ -60,13 +63,14 @@
         bind:value={password}
       />
       <input
+      class="input input-bordered w-full max-w-xs mb-2"
         id="confirmedPw"
         name="confirmedPw"
         type="text"
         placeholder="Confirm Password"
         bind:value={confirmedPw}
       />
-      <button>Sign Up</button>
+      <button class="btn">Sign Up</button>
     </form>
   </div>
 </div>

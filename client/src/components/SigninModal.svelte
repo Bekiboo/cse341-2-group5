@@ -28,14 +28,21 @@
 
 <!-- {#if signinModal} -->
 
-<input type="checkbox" id="login-modal" class="modal-toggle" bind:checked={open} />
+<input
+  type="checkbox"
+  id="login-modal"
+  class="modal-toggle"
+  bind:checked={open}
+/>
 <div class="modal">
   <div class="modal-box">
-    <label for="login-modal" class="btn btn-sm btn-circle absolute right-2 top-2"
-      >✕</label
+    <label
+      for="login-modal"
+      class="btn btn-sm btn-circle absolute right-2 top-2">✕</label
     >
-    <form on:submit={login}>
+    <form on:submit={login} class="flex flex-col items-center">
       <input
+        class="input input-bordered w-full max-w-xs mb-2"
         id="email"
         name="email"
         type="email"
@@ -43,13 +50,14 @@
         bind:value={email}
       />
       <input
+      class="input input-bordered w-full max-w-xs mb-2"
         id="password"
         name="password"
         type="text"
         placeholder="Password"
         bind:value={password}
       />
-      <button>Login</button>
+      <button class="btn">Login</button>
     </form>
   </div>
 </div>
