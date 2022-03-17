@@ -56,6 +56,7 @@ exports.login = (req, res, next) => {
             error.statusCode = 401;
             throw error;
         }
+        //JSW Token add here
     })
     .catch(err => {
         if (!err.statusCode) {

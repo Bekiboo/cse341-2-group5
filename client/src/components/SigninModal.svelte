@@ -11,17 +11,17 @@
     const formData = new FormData(e.target)
     json = Object.fromEntries(formData.entries())
     console.log(json)
-    // fetch('http://localhost:3000/auth/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(json),
-    // }).then((res) => {
-    //   if (res.status == 201) {
-    //     console.log('Login success');
-    //   }
-    // })
+    fetch('http://localhost:3000/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(json),
+    }).then((res) => {
+      if (res.status == 201) {
+        console.log('Login success');
+      }
+     })
     open = false
   }
 </script>

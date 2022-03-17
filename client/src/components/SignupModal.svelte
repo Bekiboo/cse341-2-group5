@@ -12,7 +12,7 @@
     e.preventDefault()
     const formData = new FormData(e.target)
     json = Object.fromEntries(formData.entries())
-    console.log(json)
+    //console.log(json)
     fetch('http://localhost:3000/auth/signup', {
       method: 'PUT',
       headers: {
