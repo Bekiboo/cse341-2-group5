@@ -12,7 +12,7 @@
     json = Object.fromEntries(formData.entries())
     console.log(json)
     // fetch('http://localhost:3000/auth/login', {
-    //   method: 'PUT',
+    //   method: 'POST',
     //   headers: {
     //     'Content-Type': 'application/json',
     //   },
