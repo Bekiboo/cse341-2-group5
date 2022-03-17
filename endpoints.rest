@@ -15,4 +15,4 @@ DELETE http://localhost:3000/todoList/todo/:todoId HTTP/1.1
 PUT http://localhost:3000/auth/signup 
 
 ###
-PUT http://localhost:3000/auth/login
+POST http://localhost:3000/auth/login
