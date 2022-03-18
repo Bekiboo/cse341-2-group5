@@ -58,7 +58,7 @@
       class="input input-bordered w-full max-w-xs mb-2"
         id="password"
         name="password"
-        type="text"
+        type="password"
         placeholder="Password"
         bind:value={password}
       />
