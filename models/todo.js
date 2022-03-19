@@ -15,7 +15,12 @@ const todoSchema = new Schema(
     // doer: {
     //   type: Object,
     //   required: true,
-    //},
+    // },
+    doer: {
+      type: Schema.Types.ObjectId,
+      ref: 'Family',
+      required: true,
+    },
     creator: {
       type: Object,
       required: true,
