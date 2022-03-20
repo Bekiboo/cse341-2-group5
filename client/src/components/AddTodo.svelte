@@ -16,6 +16,7 @@
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + this.props.token
       },
       body: JSON.stringify(json),
     }).then((res) => {

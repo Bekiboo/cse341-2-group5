@@ -7,7 +7,7 @@ const routes = require('./routes/todoList')
 const authRoutes = require('./routes/auth');
 
 const app = express()
-//testing
+
 
 app.use(bodyParser.json())
 
