@@ -16,7 +16,10 @@
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(json),
+      body: JSON.stringify(json, {
+        email: authData.email,
+        password: authData.password
+      }),
     }).then((res) => {
       if (res.status == 201) {
         console.log('Login success');

@@ -2,11 +2,12 @@ const express = require('express')
 const { body } = require('express-validator')
 
 const todoListController = require('../controllers/todoList')
+const isAuth = require('../middleware/is_auth');
 
 const router = express.Router()
 
 // GET /todoList/todos
-router.get('/todos', todoListController.getTodos)
+router.get('/todos', isAuth, todoListController.getTodos);
 
 // POST /todoList/todo
 router.post(
