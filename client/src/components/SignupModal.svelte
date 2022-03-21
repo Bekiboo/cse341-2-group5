@@ -66,7 +66,7 @@
       class="input input-bordered w-full max-w-xs mb-2"
         id="confirmedPw"
         name="confirmedPw"
-        type="text"
+        type="password"
         placeholder="Confirm Password"
         bind:value={confirmedPw}
       />
