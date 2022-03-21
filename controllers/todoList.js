@@ -1,4 +1,6 @@
 const { validationResult } = require('express-validator')
+const family = require('../models/family')
+const Family = require('../models/family')
 
 const Todo = require('../models/todo')
 
@@ -26,17 +28,29 @@ exports.createTodo = (req, res, next) => {
     throw error
   }
   console.log(req.body);
-  const task = req.body.task
+  const task = req.body.task;
+  let doer;
   const todo = new Todo({
     task: task,
     creator: { name: 'Parent' },
+    // doer: { _id: '62353512c76c1caf0c4aaae2', name: 'John'}
+    doer: { _id: '62353512c76c1caf0c4aaae2'}
   })
   todo
     .save()
+    .then(result => {
+      return Family.findById('62353512c76c1caf0c4aaae2');
+    })
+    .then(family => {
+      doer = family;
+      family.tasks.push(todo);
+      return family.save();
+    })
     .then((result) => {
       res.status(201).json({
         message: 'Todo created successfully',
         todo: result,
+        doer: {_id: doer._id, name: doer.name}
       })
     })
     .catch((err) => {

@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const { port, mongoURI } = require('./config')
 const routes = require('./routes/todoList')
 const authRoutes = require('./routes/auth');
+const familyRoutes = require('./routes/family');
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 app.use('/todoList', routes)
 app.use('/auth', authRoutes);
+app.use('/family', familyRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error)

@@ -16,3 +16,21 @@ PUT http://localhost:3000/auth/signup
 
 ###
 POST http://localhost:3000/auth/login
+
+###
+POST http://localhost:3000/family/member HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Clark"
+}
+
+###
+GET http://localhost:3000/family/members
+
+###
+# GET http://localhost:3000/family/member/:memberId
+
+# Use for testing endpoints only
+###
+GET http://localhost:3000/family/member/62353512c76c1caf0c4aaae2 HTTP/1.1
