@@ -1,5 +1,5 @@
 <script>
-  import Todos from '../stores/Todos'
+  import { Todos } from '../stores/Writable'
 
   let inputField
   let newFieldValue = ''
@@ -8,7 +8,6 @@
 
   let createTodo = (e) => {
     e.preventDefault()
-    // loading = true
     const formData = new FormData(e.target)
     json = Object.fromEntries(formData.entries())
     console.log(json)
@@ -16,7 +15,7 @@
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + this.props.token
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
       body: JSON.stringify(json),
     }).then((res) => {
@@ -24,10 +23,7 @@
         return res
           .json()
           .then((json) => Todos.update((t) => (t = [...t, json.todo])))
-          .then(
-            //   (loading = false),
-            (inputField.value = '')
-          )
+          .then((inputField.value = ''))
       }
     })
   }

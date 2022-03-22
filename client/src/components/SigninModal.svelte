@@ -1,4 +1,5 @@
 <script>
+  import { loggedIn } from '../stores/Writable'
   let json = {}
 
   let email
@@ -10,21 +11,30 @@
     e.preventDefault()
     const formData = new FormData(e.target)
     json = Object.fromEntries(formData.entries())
-    console.log(json)
     fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(json, {
-        email: authData.email,
-        password: authData.password
+        email: formData.email,
+        password: formData.password,
       }),
-    }).then((res) => {
-      if (res.status == 201) {
-        console.log('Login success');
-      }
-     })
+    })
+      .then((res) => {
+        if (res.status == 200) {
+          console.log('Login success')
+          return res.json()
+        }
+      })
+      .then((resData) => {
+        const token = resData.token
+        const userId = resData.userId
+        localStorage.setItem('token', token)
+        localStorage.setItem('userId', userId)
+        loggedIn.set(true)
+      })
+      .catch((err) => console.log(err))
     open = false
   }
 </script>
@@ -53,7 +63,7 @@
         bind:value={email}
       />
       <input
-      class="input input-bordered w-full max-w-xs mb-2"
+        class="input input-bordered w-full max-w-xs mb-2"
         id="password"
         name="password"
         type="password"

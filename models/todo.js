@@ -12,10 +12,6 @@ const todoSchema = new Schema(
       immutable: true,
       default: () => Date.now(),
     },
-    // doer: {
-    //   type: Object,
-    //   required: true,
-    // },
     doer: {
       type: Schema.Types.ObjectId,
       ref: 'Family',

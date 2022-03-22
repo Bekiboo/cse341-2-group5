@@ -1,4 +1,15 @@
 <script>
+  import { loggedIn } from '../stores/Writable'
+
+  let logged
+
+  loggedIn.subscribe(bool => logged = bool)
+
+  function logout() {
+    loggedIn.set(false)
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+  }
 </script>
 
 <header class="w-full navbar bg-base-300 flex justify-between">
@@ -10,21 +21,15 @@
   <div class="flex-none">
     <ul class="menu menu-horizontal">
       <li><label for="signup-modal">Sign Up</label></li>
-      <li><label for="login-modal">Login</label></li>
+      {#if logged == true}
+        <li on:click="{logout}"><label for="">Logout</label></li>
+      {:else}
+        <li><label for="login-modal">Login</label></li>
+      {/if}
     </ul>
   </div>
 
-  <!-- <div class="form">
-      <select name="member" id="member">
-        <option value="default" selected disabled>Member</option>
-        <option value="joseph">Joseph</option>
-        <option value="jacob">Jacob</option>
-        <option value="nephi">Nephi</option>
-        <option value="sam">Sam</option>
-        <option value="lemuel">Lemuel</option>
-        <option value="laman">Laman</option>
-      </select>
-  </div> -->
+  
 </header>
 
 <style>

@@ -5,7 +5,7 @@ const Family = require('../models/family');
 exports.getMembers = (req, res, next) => {
     Family.find()
         .then(members => {
-            res.status(200).json({memssage: 'Fetched family members successfully.',
+            res.status(200).json({message: 'Fetched family members successfully.',
             members: members});
         })
         .catch(err => {

@@ -1,5 +1,6 @@
 const express = require('express');
 const { body } = require('express-validator');
+const isAuth = require('../middleware/is_auth');
 
 const User = require('../models/user');
 const authController = require('../controllers/auth');
