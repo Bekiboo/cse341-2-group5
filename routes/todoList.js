@@ -2,16 +2,18 @@ const express = require('express')
 const { body } = require('express-validator')
 
 const todoListController = require('../controllers/todoList')
-const isAuth = require('../middleware/is_auth');
+const isAuth = require('../middleware/is-auth');
 
 const router = express.Router()
 
 // GET /todoList/todos
 router.get('/todos', isAuth, todoListController.getTodos);
+// router.get('/todos', todoListController.getTodos);
 
 // POST /todoList/todo
 router.post(
   '/todo',
+  isAuth,
 //   [
 //     body('task').trim().isLength({ min: 4 }),
 //   ],
@@ -26,6 +28,6 @@ router.post(
 //   todoListController.updateTodo
 // )
 
-router.delete('/todo/:todoId', todoListController.deleteTodo)
+router.delete('/todo/:todoId', isAuth, todoListController.deleteTodo)
 
 module.exports = router

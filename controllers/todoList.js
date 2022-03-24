@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator')
-const Family = require('../models/family')
 
+const Family = require('../models/family')
 const Todo = require('../models/todo')
 
 exports.getTodos = (req, res, next) => {
