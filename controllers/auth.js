@@ -66,7 +66,11 @@ exports.login = (req, res, next) => {
         },
         'secretGroupsecret',
         { expiresIn: '1h' }
-      )
+      );
+      // console.log(loadedUser.name);
+      // console.log(loadedUser.email);
+      // console.log(loadedUser._id);
+      // console.log(token);
       console.log('success')
       res.status(200).json({ token: token, userId: loadedUser._id.toString() })
     })

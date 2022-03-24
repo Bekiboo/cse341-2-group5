@@ -62,3 +62,26 @@ exports.getMember = (req, res, next) => {
             next(err);
         })
 }
+
+exports.deleteMember = (req, res, next) => {
+    const memberId = req.params.memberId
+    Family.findById(memberId)
+        .then((member) => {
+            if (!member) {
+                const error = new Error('Could not find todo.')
+                error.statusCode = 404
+                throw error
+            }
+            return Family.findByIdAndRemove(memberId)
+        })
+        .then(result => {
+            console.log(result)
+            res.status(200).json({message : 'Deleted family member.'})
+          })
+          .catch((err) => {
+            if (!err.statusCode) {
+              err.statusCode = 500
+            }
+            next(err)
+          })
+}

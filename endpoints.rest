@@ -1,36 +1,69 @@
 GET http://localhost:3000/todoList/todos HTTP/1.1
+# Authorization: 'Bearer ' + this.props.token,
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
+Content-Type: application/json
 
 ###
 POST http://localhost:3000/todoList/todo HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
 content-type: application/json
 
 {
-    "task": "Tidy your room please"
+    "task": "Cook Dinner On Monday"
 }
 
 ###
 DELETE http://localhost:3000/todoList/todo/:todoId HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
+
+# remove specific todo - enter in an ID
+###
+DELETE http://localhost:3000/todoList/todo/623be10e93147da1268c2f58 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
 
 ###
 PUT http://localhost:3000/auth/signup 
 
 ###
 POST http://localhost:3000/auth/login
+Authorization: 'Bearer ' + this.props.token,
+Content-Type: application/json
+
+{
+    "email": "test@test.com",
+    "password": "123456"
+}
 
 ###
 POST http://localhost:3000/family/member HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
 content-type: application/json
 
 {
-    "name": "Clark"
+    "name": "Batman"
 }
 
 ###
 GET http://localhost:3000/family/members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
 
 ###
 # GET http://localhost:3000/family/member/:memberId
 
-# Use for testing endpoints only
+# Use for testing endpoints only - enter memberID
 ###
-GET http://localhost:3000/family/member/62353512c76c1caf0c4aaae2 HTTP/1.1
+GET http://localhost:3000/family/member/623be949ab3387d5d2c35b80 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
+
+# ###
+# GET http://localhost:3000/family/member/:memberId
+# memberId: 62353512c76c1caf0c4aaae2
+
+###
+DELETE http://localhost:3000/family/member/:memberId
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ,
+content-type: application/json
+
+###
+DELETE http://localhost:3000/family/member/62353564a25b3f88d059c6d6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ

@@ -17,6 +17,10 @@ const todoSchema = new Schema(
       ref: 'Family',
       required: true,
     },
+    completed: {
+      type: Boolean,
+      default: false
+    },
     creator: {
       type: Object,
       required: true,
