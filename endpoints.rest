@@ -16,13 +16,20 @@ content-type: application/json
 DELETE http://localhost:3000/todoList/todo/:todoId HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
 
-# remove specific todo - enter in an ID
+# remove specific todo - enter a todoID
 ###
 DELETE http://localhost:3000/todoList/todo/623be10e93147da1268c2f58 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MDkyMTYyLCJleHAiOjE2NDgwOTU3NjJ9.s-f-c63VonsJ39cQjO-A6o5jLBJSB7qckRtQFnF4DCQ
 
 ###
-PUT http://localhost:3000/auth/signup 
+PUT http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "test45@test.com",
+    "name": "Tester",
+    "password": "123456"
+}
 
 ###
 POST http://localhost:3000/auth/login
