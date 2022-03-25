@@ -33,6 +33,9 @@ authController.signup
 
 router.post('/login', authController.login);
 
+router.get('/users', isAuth, authController.getUsers);
+
+router.delete('/users/:userId', isAuth, authController.deleteUser)
 // Logout route???
 
 module.exports = router;

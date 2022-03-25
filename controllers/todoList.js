@@ -31,19 +31,19 @@ exports.createTodo = (req, res, next) => {
   let doer;
   const todo = new Todo({
     task: task,
-    creator: { name: 'Parent' },
+    creator: { name: req.userId },
     // doer: { _id: '62353512c76c1caf0c4aaae2', name: 'John'}
-    doer: { _id: '62353512c76c1caf0c4aaae2'}
+    doer: { _id: '623d0690a145a5adb66461e2'}
   })
   todo
     .save()
     .then(result => {
-      return Family.findById('62353512c76c1caf0c4aaae2');
+      return Family.findById('623d0690a145a5adb66461e2');
     })
-    .then(family => {
-      doer = family;
-      family.tasks.push(todo);
-      return family.save();
+    .then(member => {
+      doer = member;
+      member.tasks.push(todo);
+      return member.save();
     })
     .then((result) => {
       res.status(201).json({
@@ -70,7 +70,21 @@ exports.deleteTodo = (req, res, next) => {
         throw error
       }
       // check logged in user
-      return Todo.findByIdAndRemove(todoId)
+      task = todoId
+      doer = todo.doer;
+      return Todo.findByIdAndRemove(todoId);
+    })
+    .then(result => {
+      //
+      // console.log(JSON.stringify(doer))
+      //
+      return Family.findById(doer);
+    })
+    .then(member => {
+      console.log(JSON.stringify(member))
+      console.log(JSON.stringify(task))
+      member.tasks.pull(task);
+      return member.save();
     })
     .then(result => {
       console.log(result)

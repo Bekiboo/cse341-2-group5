@@ -1,6 +1,8 @@
 const { validationResult } = require('express-validator');
 
 const Family = require('../models/family');
+const Todo = require('../models/todo');
+const User = require('../models/user');
 
 exports.getMembers = (req, res, next) => {
     Family.find()
@@ -27,9 +29,17 @@ exports.createMember = (req, res, next) => {
     const name = req.body.name;
     const member = new Family({
         name: name
-    })
+    });
+    console.log(JSON.stringify(req.userId));
     member
         .save()
+        .then(result => {
+            return User.findById(req.userId);
+        })
+        .then(user => {
+            user.familyMembers.push(member);
+            return user.save();
+        })
         .then((result) => {
             res.status(201).json({
                 message: 'Family Member Created Successfully.',
@@ -73,6 +83,13 @@ exports.deleteMember = (req, res, next) => {
                 throw error
             }
             return Family.findByIdAndRemove(memberId)
+        })
+        .then(result => {
+            return User.findById(req.userId);
+        })
+        .then(user => {
+            user.familyMembers.pull(memberId);
+            return user.save();
         })
         .then(result => {
             console.log(result)
