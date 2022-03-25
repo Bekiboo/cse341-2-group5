@@ -81,3 +81,42 @@ exports.login = (req, res, next) => {
       next(err)
     })
 }
+
+exports.getUsers = (req, res, next) => {
+  User.find()
+    .then((users) => {
+      res.status(200).json({
+        message: 'Fetched users successfully',
+        users: users,
+      })
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500
+      }
+      next(err)
+    })
+}
+
+exports.deleteUser = (req, res, next) => {
+  const userId = req.params.userId;
+  User.findById(userId)
+    .then((user) => {
+      if (!user) {
+        const error = new Error('Could not find todo.')
+                error.statusCode = 404
+                throw error
+      }
+      return User.findByIdAndRemove(userId);
+    })
+    .then(result => {
+      console.log(result)
+      res.status(200).json({message : 'Deleted user.'})
+    })
+    .catch((err) => {
+      if (!err.statusCode) {
+        err.statusCode = 500
+      }
+      next(err)
+    })
+}
