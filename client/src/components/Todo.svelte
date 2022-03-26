@@ -32,6 +32,7 @@
   <input
     type="checkbox"
     class="checkbox"
+    completed="{todo.completed}"
     on:change={() => completeTodo(todo._id)}
   />
   {todo.task}

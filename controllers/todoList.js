@@ -92,7 +92,7 @@ exports.updateTodo = (req, res, next) => {
     error.statusCode = 422
     throw error
   }
-  const task = req.body.task
+  const complete = req.body.completed
   Todo.findById(todoId)
     .then((todo) => {
       if (!todo) {
@@ -100,8 +100,8 @@ exports.updateTodo = (req, res, next) => {
         error.statusCode = 404
         throw error
       }
-      todo.task = task
-      return todo.save()
+      complete = !complete
+      return Todo.findByIdAndUpdate(todoId, { completed: complete })
     })
     .then((result) => {
       res.status(200).json({ message: 'Todo updated', todo: result })

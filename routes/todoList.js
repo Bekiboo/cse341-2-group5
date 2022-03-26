@@ -29,5 +29,10 @@ router.post(
 // )
 
 router.delete('/todo/:todoId', isAuth, todoListController.deleteTodo)
+router.update('/todo/:todoId', isAuth, todoListController.updateTodo)
+
+
+
+
 
 module.exports = router
