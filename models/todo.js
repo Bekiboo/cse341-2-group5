@@ -12,17 +12,18 @@ const todoSchema = new Schema(
       immutable: true,
       default: () => Date.now(),
     },
-    doer: {
+    doer: [{
       type: Schema.Types.ObjectId,
       ref: 'Family',
       required: true,
-    },
+    }],
     completed: {
       type: Boolean,
       default: false
     },
     creator: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
   },
