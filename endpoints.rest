@@ -1,6 +1,6 @@
 GET http://localhost:3000/todoList/todos HTTP/1.1
 # Authorization: 'Bearer ' + this.props.token,
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MTUxNTMyLCJleHAiOjE2NDgxNTUxMzJ9.j6Hs7RKKJbieIuWmchGHezzQeldDwE1lg1Cg0QU4wlo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MTU2NTU2LCJleHAiOjE2NDgxNjAxNTZ9.vaTeicMKfiZ0hW_h5t1Sr9lYGgC9lNgsIkHF67GIDkA
 Content-Type: application/json
 
 ###
@@ -9,7 +9,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyI
 content-type: application/json
 
 {
-    "task": "Cook Dinner On Friday"
+    "task": "Cook Dinner Tomorrow"
 }
 
 ###

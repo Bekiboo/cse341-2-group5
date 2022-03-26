@@ -5,17 +5,21 @@ const Todo = require('../models/todo');
 const User = require('../models/user');
 
 exports.getMembers = (req, res, next) => {
-    Family.find()
-        .then(members => {
-            res.status(200).json({message: 'Fetched family members successfully.',
-            members: members});
-        })
-        .catch(err => {
-            if (!err.statusCode) {
-                err.statusCode = 500;
-            }
-            next(err);
-        })
+    const query = {};
+    query.parent = req.userId;
+    // console.log(JSON.stringify(query.parent));
+Family.find(query)
+    .then(members => {
+        // console.log(JSON.stringify(members));
+        res.status(200).json({message: 'Fetched family members successfully.',
+        members: members});
+    })
+    .catch(err => {
+        if (!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    })
 }
 
 exports.createMember = (req, res, next) => {
@@ -28,7 +32,8 @@ exports.createMember = (req, res, next) => {
     console.log(req.body);
     const name = req.body.name;
     const member = new Family({
-        name: name
+        name: name,
+        parent: req.userId,
     });
     console.log(JSON.stringify(req.userId));
     member
@@ -78,7 +83,7 @@ exports.deleteMember = (req, res, next) => {
     Family.findById(memberId)
         .then((member) => {
             if (!member) {
-                const error = new Error('Could not find todo.')
+                const error = new Error('Could not find family member.')
                 error.statusCode = 404
                 throw error
             }

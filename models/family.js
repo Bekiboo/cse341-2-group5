@@ -12,7 +12,12 @@ const familySchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Todo'
             }
-        ]
+        ],
+        parent: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        }
     }
 )
 

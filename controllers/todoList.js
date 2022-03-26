@@ -1,11 +1,16 @@
 const { validationResult } = require('express-validator')
 
-const Family = require('../models/family')
-const Todo = require('../models/todo')
+const Family = require('../models/family');
+const Todo = require('../models/todo');
+const User = require('../models/user');
 
 exports.getTodos = (req, res, next) => {
-  Todo.find()
+    const query = {};
+    query.creator = req.userId;
+    console.log(JSON.stringify(query));
+  Todo.find(query)
     .then((todos) => {
+      console.log(JSON.stringify(todos));
       res.status(200).json({
         message: 'Fetched todos successfully',
         todos: todos,
@@ -31,14 +36,15 @@ exports.createTodo = (req, res, next) => {
   let doer;
   const todo = new Todo({
     task: task,
-    creator: { name: req.userId },
+    // creator: { id: req.userId },
+    creator: req.userId,
     // doer: { _id: '62353512c76c1caf0c4aaae2', name: 'John'}
-    doer: { _id: '623d0690a145a5adb66461e2'}
+    doer: { _id: '623e594c3681eb8bf876ef61'}
   })
   todo
     .save()
     .then(result => {
-      return Family.findById('623d0690a145a5adb66461e2');
+      return Family.findById('623e594c3681eb8bf876ef61');
     })
     .then(member => {
       doer = member;
