@@ -29,13 +29,11 @@ exports.createMember = (req, res, next) => {
         error.statusCode = 422;
         throw error;
     }
-    console.log(req.body);
     const name = req.body.name;
     const member = new Family({
         name: name,
         parent: req.userId,
     });
-    console.log(JSON.stringify(req.userId));
     member
         .save()
         .then(result => {
@@ -48,7 +46,8 @@ exports.createMember = (req, res, next) => {
         .then((result) => {
             res.status(201).json({
                 message: 'Family Member Created Successfully.',
-                member: result
+                member: result,
+                memberId: member._id
             })
         })
         .catch((err) => {

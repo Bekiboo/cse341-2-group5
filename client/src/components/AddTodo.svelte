@@ -10,7 +10,6 @@
     e.preventDefault()
     const formData = new FormData(e.target)
     json = Object.fromEntries(formData.entries())
-    console.log(json)
     fetch('http://localhost:3000/todoList/todo', {
       method: 'POST',
       headers: {

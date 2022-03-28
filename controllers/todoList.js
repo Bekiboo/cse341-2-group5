@@ -7,7 +7,6 @@ const User = require('../models/user');
 exports.getTodos = (req, res, next) => {
     const query = {};
     query.creator = req.userId;
-    console.log(JSON.stringify(query));
   Todo.find(query)
     .then((todos) => {
       console.log(JSON.stringify(todos));

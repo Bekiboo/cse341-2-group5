@@ -66,13 +66,15 @@ exports.login = (req, res, next) => {
         },
         'secretGroupsecret',
         { expiresIn: '1h' }
-      );
-      // console.log(loadedUser.name);
-      // console.log(loadedUser.email);
-      // console.log(loadedUser._id);
-      // console.log(token);
+      )
       console.log('success')
-      res.status(200).json({ token: token, userId: loadedUser._id.toString() })
+      res
+        .status(200)
+        .json({
+          token: token,
+          userId: loadedUser._id.toString(),
+          familyMembers: loadedUser.familyMembers,
+        })
     })
     .catch((err) => {
       if (!err.statusCode) {
@@ -99,19 +101,19 @@ exports.getUsers = (req, res, next) => {
 }
 
 exports.deleteUser = (req, res, next) => {
-  const userId = req.params.userId;
+  const userId = req.params.userId
   User.findById(userId)
     .then((user) => {
       if (!user) {
         const error = new Error('Could not find todo.')
-                error.statusCode = 404
-                throw error
+        error.statusCode = 404
+        throw error
       }
-      return User.findByIdAndRemove(userId);
+      return User.findByIdAndRemove(userId)
     })
-    .then(result => {
+    .then((result) => {
       console.log(result)
-      res.status(200).json({message : 'Deleted user.'})
+      res.status(200).json({ message: 'Deleted user.' })
     })
     .catch((err) => {
       if (!err.statusCode) {
