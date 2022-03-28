@@ -92,7 +92,7 @@ exports.updateTodo = (req, res, next) => {
     error.statusCode = 422
     throw error
   }
-  const complete = req.body.completed
+  var complete = req.body.completed
   Todo.findById(todoId)
     .then((todo) => {
       if (!todo) {
