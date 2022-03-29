@@ -6,13 +6,12 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router()
 
-// GET /todoList/todos
-router.get('/todos', isAuth, todoListController.getTodos);
-// router.get('/todos', todoListController.getTodos);
+// GET /todoList/todo/:memberId
+router.get('/todo/:todoId', isAuth, todoListController.getTodo);
 
 // POST /todoList/todo
 router.post(
-  '/todo',
+  '/todo/:memberId',
   isAuth,
 //   [
 //     body('task').trim().isLength({ min: 4 }),

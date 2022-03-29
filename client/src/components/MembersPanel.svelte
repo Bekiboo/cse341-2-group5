@@ -22,7 +22,6 @@
           return res.json()
         })
         .then((resData) => {
-          console.log(resData.member.name)
           updatedMemberList.push({ name: resData.member.name, memberId: id })
           members = updatedMemberList
         })

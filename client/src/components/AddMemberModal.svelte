@@ -27,7 +27,6 @@
       })
       .then((resData) => {
         const memberId = resData.memberId
-        console.log(memberId);
         familyMembersIds.update(Ids => [...Ids, memberId])
       })
       .catch((err) => console.log(err))
