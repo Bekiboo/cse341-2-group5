@@ -5,6 +5,9 @@
 
   export let todo
 
+  let checked = ''
+
+
   let deleteTodo = (id) => {
     fetch('http://localhost:3000/todoList/todo/' + id, {
       method: 'DELETE',
@@ -23,6 +26,10 @@
       method: 'UPDATE',
     }).then((res) => {
       if (res.status == 200) {
+
+      }
+      if(todo.completed == true){
+        checked = 'checked'
       }
     })
   }
@@ -33,6 +40,7 @@
     type="checkbox"
     class="checkbox"
     completed="{todo.completed}"
+   {checked}
     on:change={() => completeTodo(todo._id)}
   />
   {todo.task}
