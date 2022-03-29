@@ -22,7 +22,6 @@
 
   let completeTodo = (id) => {
     
-    console.log('Task completed')
     
     fetch('http://localhost:3000/todoList/todo/' + id, {
       method: 'UPDATE',
