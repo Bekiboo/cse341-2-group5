@@ -1,5 +1,12 @@
 <script>
+  import { memberId } from '../stores/Writable'
   import { Todos } from '../stores/Writable'
+
+  let selectedMemberId
+
+  memberId.subscribe(id => {
+		selectedMemberId = id;
+	});
 
   let inputField
   let newFieldValue = ''
@@ -10,7 +17,7 @@
     e.preventDefault()
     const formData = new FormData(e.target)
     json = Object.fromEntries(formData.entries())
-    fetch('http://localhost:3000/todoList/todo', {
+    fetch('http://localhost:3000/todoList/todo/' + selectedMemberId, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -8,6 +8,10 @@
   let deleteTodo = (id) => {
     fetch('http://localhost:3000/todoList/todo/' + id, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
     })
       .then((res) => {
         if (res.status == 200) {
@@ -32,10 +36,10 @@
   <input
     type="checkbox"
     class="checkbox"
-    on:change={() => completeTodo(todo._id)}
+    on:change={() => console.log(todo.id)}
   />
   {todo.task}
-  <button on:click={() => deleteTodo(todo._id)}
+  <button on:click={() => deleteTodo(todo.id)}
     ><img src="trash.png" alt="trash icon" /></button
   >
 </label>

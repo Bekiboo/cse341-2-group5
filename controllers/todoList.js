@@ -1,26 +1,28 @@
 const { validationResult } = require('express-validator')
 
-const Family = require('../models/family');
-const Todo = require('../models/todo');
-const User = require('../models/user');
+const Family = require('../models/family')
+const Todo = require('../models/todo')
+const User = require('../models/user')
 
-exports.getTodos = (req, res, next) => {
-    const query = {};
-    query.creator = req.userId;
-  Todo.find(query)
-    .then((todos) => {
-      console.log(JSON.stringify(todos));
-      res.status(200).json({
-        message: 'Fetched todos successfully',
-        todos: todos,
-      })
+exports.getTodo = async (req, res, next) => {
+  let todoId = req.params.todoId
+  try {
+    const todo = await Todo.findById(todoId)
+    if (!todo) {
+      const error = new Error('Could not find task.')
+      error.statusCode = 404
+      throw error
+    }
+    res.status(200).json({
+      message: 'Task fetched',
+      todo: todo,
     })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500
-      }
-      next(err)
-    })
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500
+    }
+    next(err)
+  }
 }
 
 exports.createTodo = (req, res, next) => {
@@ -30,31 +32,29 @@ exports.createTodo = (req, res, next) => {
     error.statusCode = 422
     throw error
   }
-  console.log(req.body);
-  const task = req.body.task;
-  let doer;
+  const task = req.body.task
+  const memberId = req.params.memberId
+  let doer
   const todo = new Todo({
     task: task,
-    // creator: { id: req.userId },
     creator: req.userId,
-    // doer: { _id: '62353512c76c1caf0c4aaae2', name: 'John'}
-    doer: { _id: '623e594c3681eb8bf876ef61'}
+    doer: { _id: memberId },
   })
   todo
     .save()
-    .then(result => {
-      return Family.findById('623e594c3681eb8bf876ef61');
+    .then((result) => {
+      return Family.findById(memberId)
     })
-    .then(member => {
-      doer = member;
-      member.tasks.push(todo);
-      return member.save();
+    .then((member) => {
+      doer = member
+      member.tasks.push(todo)
+      return member.save()
     })
     .then((result) => {
       res.status(201).json({
         message: 'Todo created successfully',
-        todo: result,
-        doer: {_id: doer._id, name: doer.name}
+        todo: {_id: todo._id, task: todo.task},
+        doer: { _id: doer._id, name: doer.name },
       })
     })
     .catch((err) => {
@@ -76,24 +76,24 @@ exports.deleteTodo = (req, res, next) => {
       }
       // check logged in user
       task = todoId
-      doer = todo.doer;
-      return Todo.findByIdAndRemove(todoId);
+      doer = todo.member
+      return Todo.findByIdAndRemove(todoId)
     })
-    .then(result => {
+    .then((result) => {
       //
       // console.log(JSON.stringify(doer))
       //
-      return Family.findById(doer);
+      return Family.findById(doer)
     })
-    .then(member => {
+    .then((member) => {
       console.log(JSON.stringify(member))
       console.log(JSON.stringify(task))
-      member.tasks.pull(task);
-      return member.save();
+      member.tasks.pull(task)
+      return member.save()
     })
-    .then(result => {
+    .then((result) => {
       console.log(result)
-      res.status(200).json({message : 'Deleted todo.'})
+      res.status(200).json({ message: 'Deleted todo.' })
     })
     .catch((err) => {
       if (!err.statusCode) {

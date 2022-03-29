@@ -1,12 +1,22 @@
 <script>
-  import { loggedIn } from '../stores/Writable'
+  import {
+    loggedIn,
+    Todos,
+    familyMembersIds,
+    memberTodosIds,
+    memberId,
+  } from '../stores/Writable'
 
   let logged
 
-  loggedIn.subscribe(bool => logged = bool)
+  loggedIn.subscribe((bool) => (logged = bool))
 
   function logout() {
     loggedIn.set(false)
+    Todos.set([{}])
+    familyMembersIds.set([])
+    memberTodosIds.set([])
+    memberId.set()
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
   }
@@ -22,14 +32,12 @@
     <ul class="menu menu-horizontal">
       <li><label for="signup-modal">Sign Up</label></li>
       {#if logged == true}
-        <li on:click="{logout}"><label for="">Logout</label></li>
+        <li on:click={logout}><label for="">Logout</label></li>
       {:else}
         <li><label for="login-modal">Login</label></li>
       {/if}
     </ul>
   </div>
-
-  
 </header>
 
 <style>

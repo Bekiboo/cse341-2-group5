@@ -12,7 +12,7 @@ const todoSchema = new Schema(
       immutable: true,
       default: () => Date.now(),
     },
-    doer: [{
+    member: [{
       type: Schema.Types.ObjectId,
       ref: 'Family',
       required: true,
@@ -20,11 +20,6 @@ const todoSchema = new Schema(
     completed: {
       type: Boolean,
       default: false
-    },
-    creator: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
     },
   },
   { timestamps: true }
