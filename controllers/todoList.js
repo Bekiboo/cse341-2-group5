@@ -105,13 +105,7 @@ exports.deleteTodo = (req, res, next) => {
 
 exports.updateTodo = (req, res, next) => {
   const todoId = req.params.todoId
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    const error = new Error('Validation failed, entered data is incorrect')
-    error.statusCode = 422
-    throw error
-  }
-  const task = req.body.task
+  var complete = req.body.completed
   Todo.findById(todoId)
     .then((todo) => {
       if (!todo) {
@@ -119,8 +113,8 @@ exports.updateTodo = (req, res, next) => {
         error.statusCode = 404
         throw error
       }
-      todo.task = task
-      return todo.save()
+      complete = !complete
+      return Todo.findByIdAndUpdate(todoId, { completed: complete })
     })
     .then((result) => {
       res.status(200).json({ message: 'Todo updated', todo: result })
@@ -132,3 +126,4 @@ exports.updateTodo = (req, res, next) => {
       next(err)
     })
 }
+

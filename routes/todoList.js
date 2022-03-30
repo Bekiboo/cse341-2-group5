@@ -19,13 +19,9 @@ router.post(
   todoListController.createTodo
 )
 
-// router.put(
-//   '/todo/:todoId',
-//   [
-//     body('title').trim().isLength({ min: 5 }),
-//   ],
-//   todoListController.updateTodo
-// )
+router.put(
+  '/todo/:todoId', isAuth, todoListController.updateTodo
+)
 
 router.delete('/todo/:todoId', isAuth, todoListController.deleteTodo)
 

@@ -26,7 +26,7 @@ let status = 'Incomplete'
   let completeTodo = (id) => {
    
     fetch('http://localhost:3000/todoList/todo/' + id, {
-      method: 'put',
+      method: 'PUT',
     }).then((res) => {
       completed = !completed
       if(completed === true){
@@ -34,6 +34,7 @@ let status = 'Incomplete'
       }
       else{status = 'Incomplete'}
       if (res.status == 200) {
+
       }
     })
   }
