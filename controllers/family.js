@@ -7,10 +7,8 @@ const User = require('../models/user');
 exports.getMembers = (req, res, next) => {
     const query = {};
     query.parent = req.userId;
-    // console.log(JSON.stringify(query.parent));
 Family.find(query)
     .then(members => {
-        // console.log(JSON.stringify(members));
         res.status(200).json({message: 'Fetched family members successfully.',
         members: members});
     })

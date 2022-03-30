@@ -5,6 +5,11 @@
 
   export let todo
 
+  let todos
+  Todos.subscribe((data) => {
+    todos = data
+  })
+
   let deleteTodo = (id) => {
     fetch('http://localhost:3000/todoList/todo/' + id, {
       method: 'DELETE',
@@ -15,18 +20,25 @@
     })
       .then((res) => {
         if (res.status == 200) {
-          Todos.update((list) => list.filter((t) => t._id !== id))
+          Todos.update((list) => list.filter((t) => t.id !== id))
         }
       })
       .catch((err) => console.log(err))
   }
 
-  let completeTodo = (id) => {
-    console.log('Task completed')
+  let completeTodo = (id, status) => {
     fetch('http://localhost:3000/todoList/todo/' + id, {
-      method: 'UPDATE',
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        completed: !status,
+      }),
     }).then((res) => {
       if (res.status == 200) {
+        console.log('Todo updated');
       }
     })
   }
@@ -36,7 +48,8 @@
   <input
     type="checkbox"
     class="checkbox"
-    on:change={() => console.log(todo.id)}
+    checked={todo.completed}
+    on:change={() => completeTodo(todo.id, todo.completed)}
   />
   {todo.task}
   <button on:click={() => deleteTodo(todo.id)}

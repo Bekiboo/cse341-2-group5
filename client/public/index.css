@@ -2544,6 +2544,9 @@ body[dir="rtl"] .checkbox:checked,
 .mt-2 {
   margin-top: 0.5rem;
 }
+.mt-16 {
+  margin-top: 4rem;
+}
 .flex {
   display: flex;
 }
@@ -2581,9 +2584,12 @@ body[dir="rtl"] .checkbox:checked,
   --tw-bg-opacity: 1;
   background-color: hsl(var(--b3, var(--b2)) / var(--tw-bg-opacity));
 }
-.bg-emerald-300 {
+.bg-cyan-300 {
   --tw-bg-opacity: 1;
-  background-color: rgb(110 231 183 / var(--tw-bg-opacity));
+  background-color: rgb(103 232 249 / var(--tw-bg-opacity));
+}
+.p-12 {
+  padding: 3rem;
 }
 .px-8 {
   padding-left: 2rem;
@@ -2596,9 +2602,16 @@ body[dir="rtl"] .checkbox:checked,
 .font-bold {
   font-weight: 700;
 }
+.font-black {
+  font-weight: 900;
+}
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-zinc-700 {
+  --tw-text-opacity: 1;
+  color: rgb(63 63 70 / var(--tw-text-opacity));
 }
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);

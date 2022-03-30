@@ -37,8 +37,7 @@ exports.createTodo = (req, res, next) => {
   let doer
   const todo = new Todo({
     task: task,
-    creator: req.userId,
-    doer: { _id: memberId },
+    member: { _id: memberId },
   })
   todo
     .save()
@@ -80,19 +79,13 @@ exports.deleteTodo = (req, res, next) => {
       return Todo.findByIdAndRemove(todoId)
     })
     .then((result) => {
-      //
-      // console.log(JSON.stringify(doer))
-      //
       return Family.findById(doer)
     })
     .then((member) => {
-      console.log(JSON.stringify(member))
-      console.log(JSON.stringify(task))
       member.tasks.pull(task)
       return member.save()
     })
     .then((result) => {
-      console.log(result)
       res.status(200).json({ message: 'Deleted todo.' })
     })
     .catch((err) => {
@@ -111,7 +104,8 @@ exports.updateTodo = (req, res, next) => {
     error.statusCode = 422
     throw error
   }
-  const task = req.body.task
+  console.log(req.body);
+  const completed = req.body.completed
   Todo.findById(todoId)
     .then((todo) => {
       if (!todo) {
@@ -119,7 +113,7 @@ exports.updateTodo = (req, res, next) => {
         error.statusCode = 404
         throw error
       }
-      todo.task = task
+      todo.completed = completed
       return todo.save()
     })
     .then((result) => {
