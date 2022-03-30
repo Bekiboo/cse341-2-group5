@@ -1,5 +1,5 @@
 <script>
-  import { familyMembersIds, memberId } from '../stores/Writable'
+  import { familyMembersIds, memberId, Todos } from '../stores/Writable'
 
   let open
 
@@ -22,13 +22,12 @@
         if (res.status == 200) {
           console.log('Member Deleted')
           open = false
-          return res.json()
         }
       })
       .then((resData) => {
-        const memberId = resData.memberId
-        console.log(memberId)
-        familyMembersIds.update((Ids) => [...Ids, memberId])
+        familyMembersIds.update((Ids) => Ids.filter((ids) => ids !== memberToDelete))
+        Todos.set([{}])
+        memberId.set()
       })
       .catch((err) => console.log(err))
   }

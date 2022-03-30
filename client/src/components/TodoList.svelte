@@ -19,7 +19,6 @@
 
   Todos.subscribe((data) => {
     todos = data
-    console.log(todos)
   })
 
   memberId.subscribe((id) => {
@@ -75,7 +74,7 @@
     <MembersPanel />
 
     {#if memberSelected == undefined}
-      <p>Select a Family Member</p>
+      <p class="mt-4">Select a Family Member</p>
     {:else if todos.length > 0 && todos[0] !== undefined}
       <AddTodo />
       {#each todos as todo (todo.id)}
@@ -84,10 +83,10 @@
       {/each}
     {:else}
       <AddTodo />
-      <p>There are currently no task to show</p>
+      <p class="mt-16">There are currently no task to show</p>
     {/if}
   {:else}
-    <p>You need to be logged in</p>
+    <p class="mt-16">You need to be logged in</p>
   {/if}
 </main>
 

@@ -2544,6 +2544,12 @@ body[dir="rtl"] .checkbox:checked,
 .mt-2 {
   margin-top: 0.5rem;
 }
+.mt-8 {
+  margin-top: 2rem;
+}
+.mt-16 {
+  margin-top: 4rem;
+}
 .flex {
   display: flex;
 }

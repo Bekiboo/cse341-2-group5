@@ -6,6 +6,7 @@
 
 
   familyMembersIds.subscribe((ids) => {
+    console.log(ids)
     let updatedMemberList = []
     ids.forEach((id) =>
       fetch('http://localhost:3000/family/member/' + id, {
