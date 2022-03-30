@@ -20,7 +20,6 @@
     })
       .then((res) => {
         if (res.status == 200) {
-          console.log(todos);
           Todos.update((list) => list.filter((t) => t.id !== id))
         }
       })
@@ -39,7 +38,7 @@
       }),
     }).then((res) => {
       if (res.status == 200) {
-        console.log('awesome');
+        console.log('Todo updated');
       }
     })
   }

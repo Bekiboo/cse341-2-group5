@@ -64,7 +64,6 @@
                     completed: resData.todo.completed,
                   },
                 ])
-                console.log(todos);
               })
               .catch((err) => console.log(err))
           })
