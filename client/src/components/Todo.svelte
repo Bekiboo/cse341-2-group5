@@ -4,6 +4,8 @@
   import { Todos } from '../stores/Writable'
 
   export let todo
+let completed = false
+let status = 'Incomplete'
 
   let deleteTodo = (id) => {
     fetch('http://localhost:3000/todoList/todo/' + id, {
@@ -22,10 +24,15 @@
   }
 
   let completeTodo = (id) => {
-    console.log('Task completed')
+   
     fetch('http://localhost:3000/todoList/todo/' + id, {
-      method: 'UPDATE',
+      method: 'put',
     }).then((res) => {
+      completed = !completed
+      if(completed === true){
+        status = 'Completed'
+      }
+      else{status = 'Incomplete'}
       if (res.status == 200) {
       }
     })
@@ -36,9 +43,12 @@
   <input
     type="checkbox"
     class="checkbox"
-    on:change={() => console.log(todo.id)}
+    completed={completed}
+    on:change={() => completeTodo(todo.id)}
   />
-  {todo.task}
+  Chore: {todo.task}
+  <br>
+  Status: {status}
   <button on:click={() => deleteTodo(todo.id)}
     ><img src="trash.png" alt="trash icon" /></button
   >
