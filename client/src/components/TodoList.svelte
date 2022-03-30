@@ -58,8 +58,13 @@
               .then((resData) => {
                 Todos.update((todos) => [
                   ...todos,
-                  { task: resData.todo.task, id: resData.todo._id },
+                  {
+                    task: resData.todo.task,
+                    id: resData.todo._id,
+                    completed: resData.todo.completed,
+                  },
                 ])
+                console.log(todos);
               })
               .catch((err) => console.log(err))
           })

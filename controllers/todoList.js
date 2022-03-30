@@ -104,7 +104,8 @@ exports.updateTodo = (req, res, next) => {
     error.statusCode = 422
     throw error
   }
-  const task = req.body.task
+  console.log(req.body);
+  const completed = req.body.completed
   Todo.findById(todoId)
     .then((todo) => {
       if (!todo) {
@@ -112,7 +113,7 @@ exports.updateTodo = (req, res, next) => {
         error.statusCode = 404
         throw error
       }
-      todo.task = task
+      todo.completed = completed
       return todo.save()
     })
     .then((result) => {

@@ -23,11 +23,9 @@
 </script>
 
 <header class="w-full navbar bg-base-300 flex justify-between">
-  <img
-    src="https://images.unsplash.com/photo-1581622558663-b2e33377dfb2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2hvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-    alt="logo"
-    class="mask mask-parallelogram-3 bg-emerald-300 h-16 ml-4"
-  />
+  <div
+    class="mask mask-parallelogram-3 bg-cyan-300 h-16 ml-4 p-12 text-zinc-700 font-black"
+  >Family <br> Todos</div>
   <div class="flex-none">
     <ul class="menu menu-horizontal">
       <li><label for="signup-modal">Sign Up</label></li>
