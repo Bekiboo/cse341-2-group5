@@ -9,67 +9,81 @@
 
   loggedIn.subscribe((bool) => (logged = bool))
 
+  let memberSelected
+
+  memberId.subscribe((data) => {
+    memberSelected = data
+  })
+
   let todos = []
 
   Todos.subscribe((data) => {
     todos = data
-    console.log(todos);
+    console.log(todos)
   })
 
   memberId.subscribe((id) => {
-    fetch('http://localhost:3000/family/member/' + id, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    })
-      .then((res) => {
-        if (res.status !== 200) {
-          throw new Error('Failed to fetch member.')
-        }
-        return res.json()
+    if (id) {
+      fetch('http://localhost:3000/family/member/' + id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
       })
-      .then((resData) => {
-        Todos.set([])
-        return resData.member.tasks
-      })
-      .then((tasksIds) => {
-        tasksIds.forEach((id) => {
-          fetch('http://localhost:3000/todoList/todo/' + id, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: 'Bearer ' + localStorage.getItem('token'),
-            },
-          })
-            .then((res) => {
-              if (res.status !== 200) {
-                throw new Error('Failed to fetch todos.')
-              }
-              return res.json()
-            })
-            .then((resData) => {
-              Todos.update((todos) => [...todos, {task: resData.todo.task, id: resData.todo._id}])
-            })
-            .catch((err) => console.log(err))
+        .then((res) => {
+          if (res.status !== 200) {
+            throw new Error('Failed to fetch member.')
+          }
+          return res.json()
         })
-      })
-      .catch((err) => console.log(err))
+        .then((resData) => {
+          Todos.set([])
+          return resData.member.tasks
+        })
+        .then((tasksIds) => {
+          tasksIds.forEach((id) => {
+            fetch('http://localhost:3000/todoList/todo/' + id, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + localStorage.getItem('token'),
+              },
+            })
+              .then((res) => {
+                if (res.status !== 200) {
+                  throw new Error('Failed to fetch todos.')
+                }
+                return res.json()
+              })
+              .then((resData) => {
+                Todos.update((todos) => [
+                  ...todos,
+                  { task: resData.todo.task, id: resData.todo._id },
+                ])
+              })
+              .catch((err) => console.log(err))
+          })
+        })
+        .catch((err) => console.log(err))
+    }
   })
 </script>
 
 <main class="flex flex-col">
   {#if logged == true}
     <MembersPanel />
-    <AddTodo />
 
-    {#if todos.length > 0}
+    {#if memberSelected == undefined}
+      <p>Select a Family Member</p>
+    {:else if todos.length > 0 && todos[0] !== undefined}
+      <AddTodo />
       {#each todos as todo (todo.id)}
         <Todo {todo} />
         <!-- transition:fly={{ x: 50, duration: 100 }} -->
       {/each}
     {:else}
+      <AddTodo />
       <p>There are currently no task to show</p>
     {/if}
   {:else}

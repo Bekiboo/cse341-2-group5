@@ -4,9 +4,9 @@
 
   let selectedMemberId
 
-  memberId.subscribe(id => {
-		selectedMemberId = id;
-	});
+  memberId.subscribe((id) => {
+    selectedMemberId = id
+  })
 
   let inputField
   let newFieldValue = ''
@@ -28,7 +28,11 @@
       if (res.status == 201) {
         return res
           .json()
-          .then((json) => Todos.update((t) => (t = [...t, json.todo])))
+          .then((json) =>
+            Todos.update(
+              (t) => (t = [...t, { task: json.todo.task, id: json.todo._id }])
+            )
+          )
           .then((inputField.value = ''))
       }
     })

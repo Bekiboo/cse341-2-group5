@@ -86,7 +86,6 @@ exports.deleteTodo = (req, res, next) => {
       return member.save()
     })
     .then((result) => {
-      console.log(result)
       res.status(200).json({ message: 'Deleted todo.' })
     })
     .catch((err) => {

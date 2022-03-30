@@ -5,6 +5,11 @@
 
   export let todo
 
+  let todos
+  Todos.subscribe((data) => {
+    todos = data
+  })
+
   let deleteTodo = (id) => {
     fetch('http://localhost:3000/todoList/todo/' + id, {
       method: 'DELETE',
@@ -15,21 +20,22 @@
     })
       .then((res) => {
         if (res.status == 200) {
-          Todos.update((list) => list.filter((t) => t._id !== id))
+          console.log(todos);
+          Todos.update((list) => list.filter((t) => t.id !== id))
         }
       })
       .catch((err) => console.log(err))
   }
 
-  let completeTodo = (id) => {
-    console.log('Task completed')
-    fetch('http://localhost:3000/todoList/todo/' + id, {
-      method: 'UPDATE',
-    }).then((res) => {
-      if (res.status == 200) {
-      }
-    })
-  }
+  // let completeTodo = (id) => {
+  //   console.log('Task completed')
+  //   fetch('http://localhost:3000/todoList/todo/' + id, {
+  //     method: 'UPDATE',
+  //   }).then((res) => {
+  //     if (res.status == 200) {
+  //     }
+  //   })
+  // }
 </script>
 
 <label transition:fly={{ x: 50, duration: 100 }} class="flex justify-between">

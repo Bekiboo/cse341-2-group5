@@ -34,34 +34,11 @@
         localStorage.setItem('userId', userId)
         familyMembersIds.set(resData.familyMembers)
         loggedIn.set(true)
-        // getFamily()
       })
       .catch((err) => console.log(err))
     open = false
   }
-
-  // function getFamily(() => {
-  //   fetch('http://localhost:3000/todoList/todos', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: 'Bearer ' + localStorage.getItem('token'),
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (res.status !== 200) {
-  //         throw new Error('Failed to fetch todos.')
-  //       }
-  //       return res.json()
-  //     })
-  //     .then((resData) => {
-  //       Todos.update((t) => resData.todos)
-  //     })
-  //     .catch((err) => console.log(err))
-  // })
 </script>
-
-<!-- {#if signinModal} -->
 
 <input
   type="checkbox"
