@@ -17,6 +17,10 @@ content-type: application/json
 DELETE http://localhost:3000/todoList/todo/:todoId HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MTUxNTMyLCJleHAiOjE2NDgxNTUxMzJ9.j6Hs7RKKJbieIuWmchGHezzQeldDwE1lg1Cg0QU4wlo
 
+###
+PUT http://localhost:3000/todoList/todo/:todoId HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVGVzdGVyIiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjoiNjIzYmNlODk1NzA1YmM3ZTEzM2E4ZmM2IiwiaWF0IjoxNjQ4MTUxNTMyLCJleHAiOjE2NDgxNTUxMzJ9.j6Hs7RKKJbieIuWmchGHezzQeldDwE1lg1Cg0QU4wlo
+
 # remove specific todo - enter a todoID
 ###
 # DELETE http://localhost:3000/todoList/todo/623ccc55a8721e848598d82f HTTP/1.1
