@@ -28,24 +28,32 @@ exports.createMember = (req, res, next) => {
         throw error;
     }
     const name = req.body.name;
-    const member = new Family({
-        name: name,
-        parent: req.userId,
-    });
-    member
-        .save()
-        .then(result => {
-            return User.findById(req.userId);
-        })
-        .then(user => {
-            user.familyMembers.push(member);
-            return user.save();
-        })
-        .then((result) => {
-            res.status(201).json({
-                message: 'Family Member Created Successfully.',
-                member: result,
-                memberId: member._id
+    Family.findOne({ name: name})
+        .then((thisMember) => {
+            if(thisMember) {
+                const error = new Error('Family member already exists.')
+                error.statusCode = 401
+                throw error
+            }
+            const member = new Family({
+                name: name,
+                parent: req.userId,
+            });
+            member
+            .save()
+            .then(result => {
+                return User.findById(req.userId);
+            })
+            .then(user => {
+                user.familyMembers.push(member);
+                return user.save();
+            })
+            .then((result) => {
+                res.status(201).json({
+                    message: 'Family Member Created Successfully.',
+                    member: result,
+                    memberId: member._id
+                })
             })
         })
         .catch((err) => {

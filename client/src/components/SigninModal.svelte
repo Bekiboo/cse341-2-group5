@@ -7,6 +7,10 @@
 
   let open
 
+  let signInError = false
+  let missingEmail = false
+  let missingPassword = false
+
   let login = (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
@@ -22,7 +26,28 @@
       }),
     })
       .then((res) => {
-        if (res.status == 200) {
+        if (!email) {
+          console.log('Missing email.')
+          open = true
+          signInError = false
+          missingPassword = false
+          missingEmail = true
+        }
+        else if (!password) {
+          console.log('Missing password.')
+          open = true
+          signInError = false
+          missingPassword = true
+          missingEmail = false
+        }
+        else if (res.status == 401) {
+          console.log('User name or password was incorrect.')
+          open = true
+          missingPassword = false
+          missingEmail = false
+          signInError = true
+        }
+        else if (res.status == 200) {
           console.log('Login success')
           return res.json()
         }
@@ -69,6 +94,29 @@
         placeholder="Password"
         bind:value={password}
       />
+
+      <!-- error handling -->
+      {#if missingEmail}
+        <style>
+          #email {
+            border: red solid 1px;
+          }
+        </style>
+        <p style="color: red; padding-bottom: 1rem; text-align: center;">Please enter an email address.</p>
+      {/if}
+      {#if missingPassword}
+        <style>
+          #password {
+            border: red solid 1px;
+          }
+        </style>
+        <p style="color: red; padding-bottom: 1rem; text-align: center;">Please enter a password.</p>
+      {/if}
+      {#if signInError}
+        <p style="color: red; padding-bottom: 1rem; text-align: center;">The user name or password was incorrect. Please try again.</p>
+      {/if}
+      <!-- end error handling -->
+    
       <button class="btn">Login</button>
     </form>
   </div>
