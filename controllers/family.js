@@ -28,13 +28,21 @@ exports.createMember = (req, res, next) => {
         throw error;
     }
     const name = req.body.name;
-    Family.findOne({ name: name})
-        .then((thisMember) => {
-            if(thisMember) {
-                const error = new Error('Family member already exists.')
-                error.statusCode = 401
-                throw error
-            }
+    Family.find({ name: name})
+        .then((thisName) => {
+            if(thisName) {
+                console.log(JSON.stringify(thisName))
+                thisName.forEach((name) => {
+                    console.log(JSON.stringify(name))
+                    console.log(JSON.stringify(name.parent))
+                    console.log(JSON.stringify(req.userId))
+                    if(name.parent == req.userId) {
+                    const error = new Error('Family member already exists.')
+                    error.statusCode = 401
+                    throw error
+                    }
+                }
+            )}
             const member = new Family({
                 name: name,
                 parent: req.userId,

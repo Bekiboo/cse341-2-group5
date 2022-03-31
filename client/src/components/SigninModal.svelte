@@ -49,6 +49,9 @@
         }
         else if (res.status == 200) {
           console.log('Login success')
+          signInError = false
+          missingEmail = false
+          missingPassword = false
           return res.json()
         }
       })

@@ -47,6 +47,9 @@
         }
         else if (res.status == 201) {
           console.log('Signup success')
+          signUpError = false
+          missingInfo = false
+          passwordNotMatch = false
           open = false
         }
       })

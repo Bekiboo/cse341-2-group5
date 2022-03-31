@@ -5,6 +5,8 @@
   let name
   let open
 
+  let familyMemberExists = false
+
   let addMember = (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
@@ -19,8 +21,14 @@
       userId: localStorage.getItem('userId'),
     })
       .then((res) => {
+        if (res.status == 401) {
+          console.log('Family member already exists.')
+          open = true
+          familyMemberExists = true
+        }
         if (res.status == 201) {
           console.log('New Member Added')
+          familyMemberExists = false
           open = false
           return res.json()
         }
@@ -54,6 +62,13 @@
         placeholder="Name"
         bind:value={name}
       />
+
+      <!-- error handling -->
+        {#if familyMemberExists}
+          <p style="color: red; padding-bottom: 1rem; text-align: center;">This family member already exists. Please add a different family member.</p>
+        {/if}
+      <!-- end error handling -->
+
       <button class="btn">Add New Member</button>
     </form>
   </div>
