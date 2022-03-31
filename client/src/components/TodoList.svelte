@@ -87,7 +87,7 @@
       {/each}
     {:else}
       <AddTodo />
-      <p class="mt-16">There are currently no task to show</p>
+      <p class="mt-16">There are currently no tasks to show</p>
     {/if}
   {:else}
     <p class="mt-16">You need to be logged in</p>
