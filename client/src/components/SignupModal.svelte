@@ -8,6 +8,10 @@
 
   let open
 
+  let signUpError = false
+  let missingInfo = false
+  let passwordNotMatch = false
+
   let signup = (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
@@ -20,8 +24,32 @@
       body: JSON.stringify(json),
     })
       .then((res) => {
-        if (res.status == 201) {
+        if (!email || !name || !password || !confirmedPw) {
+          console.log('Missing fields.')
+          open = true
+          signUpError = false
+          missingInfo = true
+          passwordNotMatch = false
+        }
+        else if (password != confirmedPw) {
+          console.log('Passwords do not match.')
+          open = true
+          signUpError = false
+          missingInfo = false
+          passwordNotMatch = true
+        }
+        else if (res.status == 422) {
+          console.log('account already exists')
+          open = true
+          signUpError = true
+          missingInfo = false
+          passwordNotMatch = false
+        }
+        else if (res.status == 201) {
           console.log('Signup success')
+          signUpError = false
+          missingInfo = false
+          passwordNotMatch = false
           open = false
         }
       })
@@ -69,6 +97,54 @@
         placeholder="Confirm Password"
         bind:value={confirmedPw}
       />
+
+      <!-- error handling -->
+      {#if missingInfo}
+        <p style="color: red; padding-bottom: 1rem; text-align: center;">Please complete all fields.</p>
+        {#if !email}
+          <style>
+            #email {
+              border: red solid 1px;
+            }
+          </style>
+        {/if}
+        {#if !name}
+          <style>
+            #name {
+              border: red solid 1px;
+            }
+          </style>
+        {/if}
+        {#if !password}
+          <style>
+            #password {
+              border: red solid 1px;
+            }
+          </style>
+        {/if}
+        {#if !confirmedPw}
+          <style>
+            #confirmedPw {
+              border: red solid 1px;
+            }
+          </style>
+        {/if}
+      {/if}
+
+      {#if passwordNotMatch}
+        <p style="color: red; padding-bottom: 1rem; text-align: center;">Your passwords do not match. Please try again.</p>
+        <style>
+            #password, #confirmedPw {
+              border: red solid 1px;
+            }
+          </style>
+      {/if}
+
+      {#if signUpError}
+        <p style="color: red; padding-bottom: 1rem; text-align: center;">An account already exists for this email address. Please try to login.</p>
+      {/if}
+      <!-- end error handling -->
+
       <button class="btn">Sign Up</button>
     </form>
   </div>
