@@ -31,11 +31,11 @@ exports.createMember = (req, res, next) => {
     Family.find({ name: name})
         .then((thisName) => {
             if(thisName) {
-                console.log(JSON.stringify(thisName))
+                // console.log(JSON.stringify(thisName))
                 thisName.forEach((name) => {
-                    console.log(JSON.stringify(name))
-                    console.log(JSON.stringify(name.parent))
-                    console.log(JSON.stringify(req.userId))
+                    // console.log(JSON.stringify(name))
+                    // console.log(JSON.stringify(name.parent))
+                    // console.log(JSON.stringify(req.userId))
                     if(name.parent == req.userId) {
                     const error = new Error('Family member already exists.')
                     error.statusCode = 401
